@@ -37,7 +37,7 @@ jobs:
 
   deploy:
     needs: prerequisites
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Git Clone
         uses: actions/checkout@v4
