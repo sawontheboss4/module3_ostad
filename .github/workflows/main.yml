@@ -1,9 +1,9 @@
 name: Git Actions CI/CD Pipeline
 
 on:
-  push:   
+  push:
     branches:
-      - main  
+      - main
   pull_request:
     branches:
       - main
@@ -32,8 +32,8 @@ jobs:
           name: test-results
           path: test-results.txt
 
-     # - name: Run the Application
-     #   run: npm start
+      # - name: Run the Application
+      #   run: npm start
 
   deploy:
     needs: prerequisites
@@ -48,24 +48,23 @@ jobs:
           name: test-results
 
       - name: Display Test Results
-    run: cat test-results.txt
+        run: cat test-results.txt
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: '22'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
 
-  - name: Install Packages
-    run: npm install
+      - name: Install Packages
+        run: npm install
 
-  - name: Install PM2
-    run: npm install -g pm2
+      - name: Install PM2
+        run: npm install -g pm2
 
-  - name: Cleanup Existing Process
-    run: pm2 delete node-app || true
+      - name: Cleanup Existing Process
+        run: pm2 delete node-app || true
 
-  - name: Start Application with PM2
-    run: pm2 start "./src/server.js" --name node-app
+      - name: Start Application with PM2
+        run: pm2 start "./src/server.js" --name node-app
 
-  - name: Save PM2 Process List
-    run: pm2 save
+      - name: Save PM2 Process List
